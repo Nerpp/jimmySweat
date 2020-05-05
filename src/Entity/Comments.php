@@ -27,12 +27,12 @@ class Comments
     private $dateTime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      */
     private $fkUser;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\tricks", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tricks", inversedBy="comments")
      */
     private $fkTricks;
 

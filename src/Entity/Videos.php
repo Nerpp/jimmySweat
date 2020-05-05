@@ -22,12 +22,12 @@ class Videos
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="videos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="videos")
      */
     private $userFK;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\tricks", inversedBy="videos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tricks", inversedBy="videos")
      */
     private $fkTricks;
 

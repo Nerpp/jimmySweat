@@ -39,7 +39,7 @@ class Tricks
     private $updateDate;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\tricksGroup", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\TricksGroup", cascade={"persist", "remove"})
      */
     private $fkTricksGroup;
 

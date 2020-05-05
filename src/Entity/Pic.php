@@ -27,12 +27,12 @@ class Pic
     private $profile;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="pics")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="pics")
      */
     private $fkUser;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\tricks", inversedBy="pics")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tricks", inversedBy="pics")
      */
     private $fkTricks;
 
