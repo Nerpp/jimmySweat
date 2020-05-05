@@ -15,8 +15,8 @@ class TricksType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-//            ->add('createDate')
-            ->add('updateDate',HiddenType::class)
+           // ->add('createDate')
+//            ->add('updateDate')
             ->add('fkTricksGroup')
         ;
     }

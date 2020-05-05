@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Tricks;
+use App\Entity\TricksGroup;
 use App\Form\TricksType;
 use App\Repository\TricksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -66,12 +67,12 @@ class TricksController extends AbstractController
     {
         $form = $this->createForm(TricksType::class, $trick);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $trick->setUpdateDate(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('tricks_index');
         }
+
 
         return $this->render('tricks/edit.html.twig', [
             'trick' => $trick,

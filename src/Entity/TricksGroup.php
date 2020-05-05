@@ -21,6 +21,35 @@ class TricksGroup
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tricks", mappedBy="fkTricksGroup")
+     */
+    private $fkTricks;
+
+    /**
+     * @return mixed
+     */
+    public function getFkTricks()
+    {
+        return $this->fkTricks;
+    }
+
+    /**
+     * @param mixed $fkTricks
+     */
+    public function setFkTricks($fkTricks): void
+    {
+        $this->fkTricks = $fkTricks;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -37,4 +66,6 @@ class TricksGroup
 
         return $this;
     }
+
+
 }
