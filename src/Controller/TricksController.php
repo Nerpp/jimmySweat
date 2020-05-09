@@ -6,6 +6,7 @@ use App\Entity\Tricks;
 use App\Entity\TricksGroup;
 use App\Form\TricksType;
 use App\Repository\TricksRepository;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

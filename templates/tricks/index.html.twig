@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Groupe</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>CreateDate</th>
@@ -21,6 +22,7 @@
         {% for trick in tricks %}
             <tr>
                 <td>{{ trick.id }}</td>
+                <td>{{ trick.fkTricksGroup.name }}</td>
                 <td>{{ trick.name }}</td>
                 <td>{{ trick.description }}</td>
                 <td>{{ trick.createDate ? trick.createDate|date('Y-m-d H:i:s') : '' }}</td>
