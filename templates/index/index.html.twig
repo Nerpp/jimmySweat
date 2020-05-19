@@ -3,27 +3,35 @@
 {% block title %}Hello BlogController!{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-12 img-responsive">
-            <img id="background" src="{{ asset('img/background/bgDefault.jpg') }}" alt="background image">
-        </div>
+    <div id="background" class="row" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+{#        <div class="col-12 img-responsive">#}
+{#            <img id="background" src="{{ asset('img/background/bgDefault.jpg') }}" alt="background image">#}
+{#        </div>#}
         <div class="col-12">
            <span class="material-icons"></span>
 
         </div>
         <div class="col-12 align-self-end">
-            <p>
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    Link with href
-                </a>
-            </p>
+
         </div>
-        <div class="col-12">
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                </div>
+{#        carrousse#}
+        <div class="container">
+            <div class="row">
+                {% for trick in tricks %}
+                    <div class="col-3">
+                        <p>{{ trick.id }}</p>
+                        <p>{{ trick.name }}</p>
+                        <p>{{ trick.description }}</p>
+                        <p>date de création :</p>
+                        <p>{{ trick.createDate|date('d-m-Y H:i') }}</p>
+                        {% if trick.updateDate %}
+                           <p>updaté le :</p>
+                            <p>{{ trick.updateDate|date('d-m-Y H:i') }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
+
     </div>
 {% endblock %}
