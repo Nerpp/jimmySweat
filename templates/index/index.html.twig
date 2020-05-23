@@ -15,12 +15,11 @@
 
         </div>
 {#        carrousse#}
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 {% for trick in tricks %}
-                    <div class="col-3">
-                        <p>{{ trick.id }}</p>
-                        <p>{{ trick.name }}</p>
+                    <div class="col-3 card">
+                        <p><a href="{{ path('tricks_show', {'id': trick.id}) }}">{{ trick.name }}</a></p>
                         <p>{{ trick.description }}</p>
                         <p>date de création :</p>
                         <p>{{ trick.createDate|date('d-m-Y H:i') }}</p>
@@ -32,6 +31,5 @@
                 {% endfor %}
             </div>
         </div>
-
     </div>
 {% endblock %}
