@@ -6,8 +6,10 @@ use App\Entity\Tricks;
 use App\Entity\TricksGroup;
 use App\Form\TricksType;
 use App\Repository\TricksRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +31,33 @@ class TricksController extends AbstractController
         ]);
     }
 
+//    fonction pour traiter les images
+    public function treatmentPic(ArrayCollection $collectionPics)
+    {
+        foreach ($collectionPics as $picture ) {
+
+            /** @var UploadedFile $nameImage */
+            $nameImage = $picture;
+            dump($nameImage);
+            die();
+            $originalName = $nameImage->getClientOriginalName();
+            $safeFilename = transliterator_transliterate(
+                'Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()',
+                $originalName
+            );
+            $newFilename = $safeFilename . '-' . uniqid() . '.' . $nameImage->guessExtension();
+            try {
+                $nameImage->move(
+//             path destination
+                    $this->getParameter('jimmySweat/public/Image/ImagesLoaded'),
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+            $picture->setLinkpictures($newFilename);
+        }
+    }
     /**
      * @Route("/new", name="tricks_new", methods={"GET","POST"})
      */
@@ -39,6 +68,9 @@ class TricksController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $collectionPics = $form->get('pics')->getData();
+            $this->treatmentPic($collectionPics);
+            //todo : traiter les images
             $trick->setCreateDate(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trick);
@@ -96,4 +128,6 @@ class TricksController extends AbstractController
 
         return $this->redirectToRoute('tricks_index');
     }
+
+
 }

@@ -1,4 +1,15 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.fkTricksGroup) }}
+    <h3>Images</h3>
+    <ul class="pic"
+        data-prototype="{{ form_widget(form.pics.vars.prototype)|e('html_attr') }}">
+        {% for pic in form.pics %}
+            <li>{{ pic.picture }}</li>
+        {% endfor %}
+    </ul>
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+

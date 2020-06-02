@@ -36,6 +36,8 @@ class Pic
      */
     private $fkTricks;
 
+    private $picture;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,5 +89,21 @@ class Pic
         $this->fkTricks = $fkTricks;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param mixed $picture
+     */
+    public function setPicture($picture): void
+    {
+        $this->picture = $picture;
     }
 }
