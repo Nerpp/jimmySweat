@@ -106,4 +106,8 @@ class Pic
     {
         $this->picture = $picture;
     }
+
+    public function __toString() {
+        return $this->picture;
+    }
 }

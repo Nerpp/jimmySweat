@@ -16,11 +16,11 @@ class IndexController extends AbstractController
      * @param TricksRepository $tricksRepository
      * @return Response
      */
-    public function index(TricksRepository $tricksRepository)
+    public function index(TricksRepository $tricksRepository):Response
     {
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
-            'tricks' => $tricksRepository->findBy(array(),array('id'=> 'ASC'),$limit=10,$offset=null)
+            'tricks' => $tricksRepository->findBy(array(),array('id'=> 'ASC'),$limit=15,$offset=null)
         ]);
     }
 }

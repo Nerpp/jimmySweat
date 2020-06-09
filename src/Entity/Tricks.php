@@ -44,7 +44,7 @@ class Tricks
     private $fkTricksGroup;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Pic", mappedBy="fkTricks")
+     * @ORM\OneToMany(targetEntity="App\Entity\Pic", cascade={"persist"},mappedBy="fkTricks")
      */
     private $pics;
 

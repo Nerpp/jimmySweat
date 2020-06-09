@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Pic;
 use App\Entity\Tricks;
 use App\Entity\TricksGroup;
 use App\Form\TricksType;
@@ -32,14 +33,13 @@ class TricksController extends AbstractController
     }
 
 //    fonction pour traiter les images
-    public function treatmentPic(ArrayCollection $collectionPics)
+    public function treatmentPic(ArrayCollection $collectionPics,Tricks $tricks)
     {
         foreach ($collectionPics as $picture ) {
 
             /** @var UploadedFile $nameImage */
-            $nameImage = $picture;
-            dump($nameImage);
-            die();
+            $nameImage = $picture->getPicture();
+//dd($nameImage);
             $originalName = $nameImage->getClientOriginalName();
             $safeFilename = transliterator_transliterate(
                 'Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()',
@@ -49,17 +49,25 @@ class TricksController extends AbstractController
             try {
                 $nameImage->move(
 //             path destination
-                    $this->getParameter('jimmySweat/public/Image/ImagesLoaded'),
+                    'Image/ImagesLoaded/',
                     $newFilename
                 );
             } catch (FileException $e) {
                 // ... handle exception if something happens during file upload
             }
-            $picture->setLinkpictures($newFilename);
+            /**@var Pic $picture */
+            $picture->setPath($newFilename);
+            $picture->setProfile(FALSE);
+            $picture->setFkTricks($tricks);
+            $picture->setFkUser($this->getUser());
         }
     }
+
     /**
      * @Route("/new", name="tricks_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
      */
     public function new(Request $request): Response
     {
@@ -69,7 +77,7 @@ class TricksController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $collectionPics = $form->get('pics')->getData();
-            $this->treatmentPic($collectionPics);
+            $this->treatmentPic($collectionPics,$trick);
             //todo : traiter les images
             $trick->setCreateDate(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
@@ -117,6 +125,9 @@ class TricksController extends AbstractController
 
     /**
      * @Route("/{id}", name="tricks_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Tricks $trick
+     * @return Response
      */
     public function delete(Request $request, Tricks $trick): Response
     {

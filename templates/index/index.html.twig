@@ -2,41 +2,56 @@
 
 {% block title %}Hello BlogController!{% endblock %}
 
-{% block body %}
-    <div id="background" class="row" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-{#        <div class="col-12 img-responsive">#}
-{#            <img id="background" src="{{ asset('img/background/bgDefault.jpg') }}" alt="background image">#}
-{#        </div>#}
-        <div class="col-12">
-           <span class="material-icons"></span>
+{% block header %}
+    {#        <div class="col-12 img-responsive">#}
+    {#            <img id="background" src="{{ asset('img/background/bgDefault.jpg') }}" alt="background image">#}
+    {#        </div>#}
+    <div class="col-12">
+        <span class="material-icons">arrow_downward</span>
 
-        </div>
-        <div class="col-12 align-self-end">
+    </div>
+    <div class="col-12 align-self-end">
 
-        </div>
-{#        carrousse#}
+    </div>
+{% endblock %}
+
+{% block section %}
+
+
+
         <div class="container-fluid">
             <div class="row">
                 {% for trick in tricks %}
-                    <div class="col-3 card">
-                        <p><a href="{{ path('tricks_show', {'id': trick.id}) }}">{{ trick.name }}</a></p>
-                        <p>{{ trick.description }}</p>
-                        <p>date de création :</p>
-                        <p>{{ trick.createDate|date('d-m-Y H:i') }}</p>
-                        {% if trick.updateDate %}
-                           <p>updaté le :</p>
-                            <p>{{ trick.updateDate|date('d-m-Y H:i') }}</p>
-                        {% endif %}
+{#                    <div class="col-3 card">#}
+{#                        <p><a href="{{ path('tricks_show', {'id': trick.id}) }}">{{ trick.name }}</a></p>#}
+{#                        <p>{{ trick.description }}</p>#}
+{#                        <p>date de création :</p>#}
+{#                        <p>{{ trick.createDate|date('d-m-Y H:i') }}</p>#}
+
+
+{#                        {% if trick.updateDate %}#}
+{#                           <p>updaté le :</p>#}
+{#                            <p>{{ trick.updateDate|date('d-m-Y H:i') }}</p>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+
+                    <div class="col-3">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="..." alt="Card image cap">
+
+                            <div class="card-body">
+                                <a href="{{ path('tricks_show', {'id': trick.id}) }}">{{ trick.name }}</a>
+                                <a class="material-icons" href="{{ path('tricks_edit', {'id': trick.id}) }}">create</a>
+                                <a class="material-icons" href="{{ path('validate_trick_delete', {'id': trick.id}) }}">delete_sweep</a>
+                            </div>
+                        </div>
                     </div>
 
                 {% endfor %}
             </div>
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
+
+
+
         </div>
-    </div>
+
 {% endblock %}
