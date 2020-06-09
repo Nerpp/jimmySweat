@@ -10,10 +10,13 @@
     <div class="col">
         <p>Voulez-vous Effacer le trick séléctionné ? </p>
     </div>
+    {{ dump(id) }}
     <div class="col">
-        <button type="button" class="btn btn-success">Délétion</button>
+        <a class="btn btn-success" href="{{ path('tricks_delete', {'id': id}) }}">Supprimer</a>
     </div>
     <div class="col">
-        <button type="button" class="btn btn-danger">Annulation</button>
+        <a href="{{ path('index') }}" class="btn btn-danger">Annulation</a>
     </div>
+
+{#    {{ form_widget(form.save, { 'label': 'Click me' }) }}#}
 {% endblock %}

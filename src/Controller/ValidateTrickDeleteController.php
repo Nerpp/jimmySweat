@@ -21,6 +21,8 @@ class ValidateTrickDeleteController extends AbstractController
 //        dd($request->attributes->getInt('id'));
         return $this->render('validate_trick_delete/index.html.twig', [
             'controller_name' => 'ValidateTrickDeleteController',
+            'id' => $request->attributes->getInt('id'),
         ]);
     }
+
 }
