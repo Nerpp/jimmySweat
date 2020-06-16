@@ -19,7 +19,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                {% for trick in tricks %}
+
 {#                    <div class="col-3 card">#}
 {#                        <p><a href="{{ path('tricks_show', {'id': trick.id}) }}">{{ trick.name }}</a></p>#}
 {#                        <p>{{ trick.description }}</p>#}
@@ -33,7 +33,9 @@
 {#                        {% endif %}#}
 {#                    </div>#}
 
-                    <div class="col-3">
+
+                {% for trick in tricks %}
+                <div class="col-3">
                         <div class="card" style="width: 18rem;">
                             <img class="card-img-top" src="..." alt="Card image cap">
 
@@ -44,8 +46,8 @@
                             </div>
                         </div>
                     </div>
-
                 {% endfor %}
+
             </div>
 
 

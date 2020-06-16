@@ -1,6 +1,6 @@
 {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.description) }}
+    {{ form_row(form.name, {'attr': { 'placeholder' : "nom du trick" } }) }}
+    {{ form_row(form.description, { 'attr': { 'placeholder': "description du trick" } }) }}
     {{ form_row(form.fkTricksGroup) }}
     <h3>Images</h3>
     <ul class="pic"

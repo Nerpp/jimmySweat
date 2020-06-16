@@ -14,9 +14,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/tricks")
+ *
  */
 class TricksController extends AbstractController
 {
@@ -32,14 +34,21 @@ class TricksController extends AbstractController
         ]);
     }
 
-//    fonction pour traiter les images
+    /**
+     * fonction pour traiter les images
+     * Require ROLE_USER for *every* controller method in this class.
+     * @IsGranted("ROLE_USER")
+     * @param ArrayCollection $collectionPics
+     * @param Tricks $tricks
+     */
     public function treatmentPic(ArrayCollection $collectionPics,Tricks $tricks)
     {
         foreach ($collectionPics as $picture ) {
 
             /** @var UploadedFile $nameImage */
+
             $nameImage = $picture->getPicture();
-//dd($nameImage);
+
             $originalName = $nameImage->getClientOriginalName();
             $safeFilename = transliterator_transliterate(
                 'Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()',
@@ -65,6 +74,8 @@ class TricksController extends AbstractController
 
     /**
      * @Route("/new", name="tricks_new", methods={"GET","POST"})
+     * Require ROLE_USER for *every* controller method in this class.
+     * @IsGranted("ROLE_USER")
      * @param Request $request
      * @return Response
      * @throws \Exception
@@ -105,6 +116,12 @@ class TricksController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="tricks_edit", methods={"GET","POST"})
+     * Require ROLE_USER for *every* controller method in this class.
+     * @IsGranted("ROLE_USER")
+     * @param Request $request
+     * @param Tricks $trick
+     * @return Response
+     * @throws \Exception
      */
     public function edit(Request $request, Tricks $trick): Response
     {
@@ -125,6 +142,8 @@ class TricksController extends AbstractController
 
     /**
      * @Route("/{id}", name="tricks_delete", methods={"DELETE"})
+     * Require ROLE_USER for *every* controller method in this class.
+     * @IsGranted("ROLE_USER")
      * @param Request $request
      * @param Tricks $trick
      * @return Response
